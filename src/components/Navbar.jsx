@@ -26,7 +26,7 @@ export default function Navbar() {
           {/* logo */}
           <h2 id="nav__logo" className="shrink-0 font-bold text-4xl">
             <a href="/">
-              <i className="fa-solid fa-film"></i> Movie
+              <i className="fa-solid fa-film"></i> SCREEN
               <span className="text-yellow-400">DB</span>
             </a>
           </h2>
