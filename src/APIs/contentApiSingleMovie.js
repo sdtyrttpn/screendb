@@ -1,5 +1,5 @@
 import api_key from "./API_KEY.js";
-import noPersonImage from "../assets/img/noPersonImage.webp";
+import noPersonImage from "../assets/img/NoPersonImage.webp";
 import noPoster from "../assets/img/no-poster.webp";
 import noBackdrop from "../assets/img/no-backdrop.webp";
 
