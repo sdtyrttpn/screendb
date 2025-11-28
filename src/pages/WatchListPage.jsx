@@ -1,11 +1,8 @@
-import Navbar from "../components/Navbar";
-import PageHeader from "../components/PageHeader";
-import Footer from "../components/Footer";
+import PageHeader from "../components/HeaderForPages";
 
 export default function WatchListPage() {
   return (
     <>
-      <Navbar />
       <PageHeader
         title={
           <span>
@@ -13,7 +10,6 @@ export default function WatchListPage() {
           </span>
         }
       />
-      <Footer />
     </>
   );
 }

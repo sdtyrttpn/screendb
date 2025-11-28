@@ -9,36 +9,40 @@ import TvShowsTopRatedPage from "./pages/TvShowsTopRatedPage";
 import TvShowsTrendingPage from "./pages/TvShowsTrendingPage";
 
 import MovieDetailsPage from "./pages/MovieDetailsPage";
+import TvShowDetailsPage from "./pages/TvShowDetailsPage";
+import PersonDetailsPage from "./pages/PersonDetailsPage";
+
 import WatchListPage from "./pages/WatchListPage";
 import ProfilePage from "./pages/ProfilePage";
+import SearchResultPage from "./pages/SearchResultsPage";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootLayout from "./components/RootLayout";
 
-const routes = createBrowserRouter(
-  [
-    { path: "/", element: <Home /> },
-
-    { path: "/movies-trending", element: <MoviesTrendingPage /> },
-    { path: "/movies-now-playing", element: <MoviesNowPlayingPage /> },
-    { path: "/movies-top-rated", element: <MoviesTopRatedPage /> },
-
-    { path: "/tv-shows-trending", element: <TvShowsTrendingPage /> },
-    { path: "/tv-shows-now-playing", element: <TvShowsNowPlayingPage /> },
-    { path: "/tv-shows-top-rated", element: <TvShowsTopRatedPage /> },
-
-    { path: "/watchlist", element: <WatchListPage /> },
-    { path: "/profile", element: <ProfilePage /> },
-    { path: "/movie/:id", element: <MovieDetailsPage /> },
-  ],
-
+const routes = createBrowserRouter([
   {
-    basename: "/screendb",
-  }
-);
+    element: <RootLayout />,
+    children: [
+      { path: "/", element: <Home /> },
+
+      { path: "/movies-trending", element: <MoviesTrendingPage /> },
+      { path: "/movies-now-playing", element: <MoviesNowPlayingPage /> },
+      { path: "/movies-top-rated", element: <MoviesTopRatedPage /> },
+
+      { path: "/tv-shows-trending", element: <TvShowsTrendingPage /> },
+      { path: "/tv-shows-now-playing", element: <TvShowsNowPlayingPage /> },
+      { path: "/tv-shows-top-rated", element: <TvShowsTopRatedPage /> },
+
+      { path: "/watchlist", element: <WatchListPage /> },
+      { path: "/profile", element: <ProfilePage /> },
+      { path: "/movie/:movie_id", element: <MovieDetailsPage /> },
+      { path: "/tv-show/:tv_id", element: <TvShowDetailsPage /> },
+      { path: "/person/:person_id", element: <PersonDetailsPage /> },
+      { path: "/search-results/:query", element: <SearchResultPage /> },
+    ],
+  },
+]);
 
 export default function App() {
-  return (
-    <>
-      <RouterProvider router={routes} />
-    </>
-  );
+  return <RouterProvider router={routes} />;
 }

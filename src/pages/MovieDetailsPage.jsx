@@ -1,10 +1,12 @@
-export default function MovieDetails() {
+import { useParams } from "react-router-dom";
+import MovieDetails from "../components/MovieDetails";
+
+export default function MovieDetailsPage() {
+  const { movie_id } = useParams();
+
   return (
     <>
-      <Navbar />
-      <Header />
-      <TrendingMovies />
-      <Footer />
+      <MovieDetails movie_id={movie_id} />
     </>
   );
 }

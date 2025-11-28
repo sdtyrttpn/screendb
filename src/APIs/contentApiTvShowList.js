@@ -1,6 +1,7 @@
 import api_key from "./API_KEY.js";
+import noPoster from "../assets/img/no-poster.webp";
 
-export async function contentApiTvShows(link, sliceNumber) {
+export async function TvShowList(link, page) {
   const genreMap = {
     10759: "Action & Adventure",
     16: "Animation",
@@ -21,19 +22,27 @@ export async function contentApiTvShows(link, sliceNumber) {
   };
 
   try {
-    const response = await fetch(`${link}&api_key=${api_key}`);
+    const response = await fetch(
+      `${link}&api_key=${api_key}&language=en-US&region=US&page=${page}`
+    );
 
     const data = await response.json();
-    const content = data.results.slice(0, sliceNumber);
+    let content = "";
+    if (data.results) {
+      content = data.results;
+    } else {
+      content = data.cast;
+    }
 
     const formatted = content.map((c) => ({
-      image: `https://image.tmdb.org/t/p/w500${c.poster_path}`,
+      id: c.id,
+      image: c.poster_path ? `https://image.tmdb.org/t/p/w500${c.poster_path}` : noPoster,
       title: c.name,
       rating: c.vote_average === 0 ? "N/A" : `${c.vote_average.toFixed(1)} / 10`,
       category: c.genre_ids.slice(0, 2).map((id) => genreMap[id] || "Unknown"),
-      year: c.first_air_date?.slice(0, 4) || "Unknown",
-      summary: c.overview || "No summary available.",
-      cast: ["Tom Cruise", "Actor 2", "Actor 3"],
+      year: c.first_air_date.slice(0, 4) || "Unknown",
+      overview: c.overview || "No summary available.",
+      mediaType: "tv-show",
     }));
 
     return formatted;

@@ -1,16 +1,16 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Header from "../components/HomePageHeader";
-import TrendingMovies from "../components/TrendingMoviesSlider";
-import Footer from "../components/Footer";
+import HomePageHeader from "../components/HeaderForHomePage";
+import MovieCardSlider from "../components/MovieCardSlider";
+import TvShowCardSlider from "../components/TvShowCardSlider";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <Header />
-      <TrendingMovies />
-      <Footer />
+      <HomePageHeader />
+      <MovieCardSlider type={"trending"} />
+      <MovieCardSlider type={"upcoming"} bg={"yes"} />
+      <TvShowCardSlider type={"airing today"} />
+      <TvShowCardSlider type={"now playing"} bg={"yes"} />
     </>
   );
 }
