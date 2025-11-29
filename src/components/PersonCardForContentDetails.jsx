@@ -10,7 +10,7 @@ export default function PersonCard({ person }) {
         <Link to={`/person/${person.id}`}>
           <h5 className="font-semibold hover:text-yellow-400 transition">{person.name}</h5>
         </Link>
-        <p className="text-gray-300 text-sm">{person.knownFor}</p>
+        <p className="text-gray-300 text-sm">{person.character}</p>
       </div>
     </div>
   );

@@ -27,12 +27,17 @@ export default function Navbar() {
     setValue(e.target.value);
   }
 
+  function closeOthers() {
+    setOpenMovies(false);
+    setOpenTV(false);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     const query = value.trim();
     if (!query) return;
 
-    navigate(`/search-results/${encodeURIComponent(query)}`);
+    navigate(`/search-results/${query}`);
   }
 
   return (
@@ -159,7 +164,11 @@ export default function Navbar() {
 
                 {/* watchlist */}
                 <li className="hover:text-yellow-400 transition">
-                  <Link to="/watchlist" className="inline-flex items-center gap-2">
+                  <Link
+                    to="/watchlist"
+                    className="inline-flex items-center gap-2"
+                    onClick={closeOthers}
+                  >
                     <i className="fa-solid fa-bookmark"></i>
                     <span>My Watchlist</span>
                   </Link>
@@ -167,7 +176,11 @@ export default function Navbar() {
 
                 {/* profile */}
                 <li className="hover:text-yellow-400 transition">
-                  <Link to="/profile" className="inline-flex items-center gap-2">
+                  <Link
+                    to="/profile"
+                    className="inline-flex items-center gap-2"
+                    onClick={closeOthers}
+                  >
                     <i className="fa-solid fa-user"></i>
                     <span>Profile</span>
                   </Link>

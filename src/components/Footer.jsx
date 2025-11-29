@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import tmdbLogo from "../assets/img/tmdbLogo.png";
 
 export default function Footer() {
@@ -10,13 +11,13 @@ export default function Footer() {
             <h5 className="font-semibold mb-3">Movies</h5>
             <ul className="pe-4 lg:border-e border-gray-600">
               <li className="mb-1 hover:text-yellow-400 transition text-gray-300 truncate">
-                <a href="/movies-trending">Trending Movies</a>
+                <Link to="/movies-trending">Trending Movies</Link>
               </li>
               <li className="mb-1 hover:text-yellow-400 transition text-gray-300 truncate">
-                <a href="/movies-now-playing">Now Playing Movies</a>
+                <Link to="/movies-now-playing">Now Playing Movies</Link>
               </li>
               <li className="mb-1 hover:text-yellow-400 transition text-gray-300 truncate">
-                <a href="/movies-top-rated">Top Rated Movies</a>
+                <Link to="/movies-top-rated">Top Rated Movies</Link>
               </li>
             </ul>
           </div>
@@ -26,13 +27,13 @@ export default function Footer() {
             <h5 className="font-semibold mb-3">Tv Shows</h5>
             <ul className="pe-4 lg:border-e border-gray-600">
               <li className="mb-1 hover:text-yellow-400 transition text-gray-300 truncate">
-                <a href="/tv-shows-trending">Trending Tv Shows</a>
+                <Link to="/tv-shows-trending">Trending Tv Shows</Link>
               </li>
               <li className="mb-1 hover:text-yellow-400 transition text-gray-300 truncate">
-                <a href="/tv-shows-now-playing">Now Playing Tv Shows</a>
+                <Link to="/tv-shows-now-playing">Now Playing Tv Shows</Link>
               </li>
               <li className="mb-1 hover:text-yellow-400 transition text-gray-300 truncate">
-                <a href="/tv-shows-top-rated">Top Rated Tv Shows</a>
+                <Link to="/tv-shows-top-rated">Top Rated Tv Shows</Link>
               </li>
             </ul>
           </div>
@@ -42,13 +43,13 @@ export default function Footer() {
             <h5 className="font-semibold mb-3">Main Pages</h5>
             <ul className="pe-4 lg:border-e border-gray-600">
               <li className="mb-1 hover:text-yellow-400 transition text-gray-300 truncate">
-                <a href="">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li className="mb-1 hover:text-yellow-400 transition text-gray-300 truncate">
-                <a href="">Profile</a>
+                <Link to="/profile">Profile</Link>
               </li>
               <li className="mb-1 hover:text-yellow-400 transition text-gray-300 truncate">
-                <a href="">My Watchlist</a>
+                <Link to="/watchlist">My Watchlist</Link>
               </li>
             </ul>
           </div>
