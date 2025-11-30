@@ -3,10 +3,13 @@ import { SingleTvShow } from "../APIs/contentApiSingleTvShow.js";
 import CastSlider from "./PersonCardSliderForContentDetail.jsx";
 import TvShowCardSlider from "./TvShowCardSlider.jsx";
 import Loader from "./Loader.jsx";
+import { useWatchlist } from "./contexts/WatchlistContext";
 
 export default function TvShowDetails({ tv_id }) {
   const [tvShow, setTvShow] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
 
   useEffect(() => {
     async function getTvShowDetails() {
@@ -19,6 +22,16 @@ export default function TvShowDetails({ tv_id }) {
 
   if (loading) {
     return <Loader />;
+  }
+
+  const check = isInWatchlist(tvShow.id, tvShow.type);
+
+  function toggleWatchlist() {
+    if (check) {
+      removeFromWatchlist(tvShow.id, tvShow.type);
+    } else {
+      addToWatchlist(tvShow);
+    }
   }
 
   return (
@@ -71,8 +84,15 @@ export default function TvShowDetails({ tv_id }) {
               </span>
 
               {/* add to watchlist */}
-              <span className="flex items-center text-xl gap-2 font-semibold">
-                <i className="fa-solid fa-bookmark  cursor-pointer hover:text-yellow-400 transition"></i>{" "}
+              <span
+                className="flex items-center text-xl gap-2 font-semibold"
+                onClick={toggleWatchlist}
+              >
+                <i
+                  className={`fa-solid fa-bookmark text-2xl cursor-pointer transition hover:text-yellow-400 ${
+                    check ? "text-yellow-400" : ""
+                  }`}
+                ></i>{" "}
                 Add to Watchlist
               </span>
 
