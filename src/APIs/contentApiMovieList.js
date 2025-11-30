@@ -54,7 +54,7 @@ export async function MovieList(link, page) {
       year: c.release_date ? c.release_date?.slice(0, 4) : "Unknown",
       overview: c.overview ? c.overview : "No summary available.",
       backDrop: c.backdrop_path ? `https://image.tmdb.org/t/p/w500${c.backdrop_path}` : noBackdrop,
-      mediaType: "movie",
+      type: "movie",
     }));
 
     return formatted;

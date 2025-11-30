@@ -101,7 +101,7 @@ export async function ContentList(link) {
     });
 
     const formatted = sorted.map((c) => {
-      const mediaType = c.media_type === "movie" ? "movie" : "tv-show";
+      const type = c.media_type === "movie" ? "movie" : "tv-show";
 
       return {
         id: c.id,
@@ -111,7 +111,7 @@ export async function ContentList(link) {
           !c.vote_average || c.vote_average === 0 ? "N/A" : `${c.vote_average.toFixed(1)} / 10`,
         category: (c.genre_ids || []).slice(0, 2).map((id) => genreMap[id] || "Unknown"),
         year: c.release_date?.slice(0, 4) || c.first_air_date?.slice(0, 4) || "Unknown",
-        mediaType, // burada artık sadece "movie" veya "tv-show"
+        type,
       };
     });
 

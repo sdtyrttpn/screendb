@@ -42,7 +42,7 @@ export async function TvShowList(link, page) {
       category: c.genre_ids.slice(0, 2).map((id) => genreMap[id] || "Unknown"),
       year: c.first_air_date.slice(0, 4) || "Unknown",
       overview: c.overview || "No summary available.",
-      mediaType: "tv-show",
+      type: "tv-show",
     }));
 
     return formatted;

@@ -2,17 +2,37 @@ import { useEffect, useState } from "react";
 import { SingleMovie } from "../APIs/contentApiSingleMovie.js";
 import CastSlider from "./PersonCardSliderForContentDetail.jsx";
 import MovieCardSlider from "./MovieCardSlider.jsx";
+import Loader from "./Loader.jsx";
+import { useWatchlist } from "./contexts/WatchlistContext";
 
 export default function MovieDetails({ movie_id }) {
-  const [movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
 
   useEffect(() => {
     async function getMovieDetails() {
       const data = await SingleMovie(movie_id);
       setMovie(data);
+      setLoading(false);
     }
     getMovieDetails();
   }, [movie_id]);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  const check = isInWatchlist(movie.id, movie.type);
+
+  function toggleWatchlist() {
+    if (check) {
+      removeFromWatchlist(movie.id, movie.type);
+    } else {
+      addToWatchlist(movie);
+    }
+  }
 
   return (
     <div>
@@ -61,8 +81,15 @@ export default function MovieDetails({ movie_id }) {
               </span>
 
               {/* add to watchlist */}
-              <span className="flex items-center text-xl gap-2 font-semibold">
-                <i className="fa-solid fa-bookmark  cursor-pointer hover:text-yellow-400 transition"></i>{" "}
+              <span
+                className="flex items-center text-xl gap-2 font-semibold"
+                onClick={toggleWatchlist}
+              >
+                <i
+                  className={`fa-solid fa-bookmark text-2xl cursor-pointer transition hover:text-yellow-400 ${
+                    check ? "text-yellow-400" : ""
+                  }`}
+                ></i>{" "}
                 Add to Watchlist
               </span>
 

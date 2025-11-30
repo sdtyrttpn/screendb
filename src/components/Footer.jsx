@@ -6,7 +6,7 @@ export default function Footer() {
     <div className="bg-gray-800 p-8 border-t-2 border-t-gray-700 w-full">
       <div className="container mx-auto">
         <div className="grid grid-cols-2 gap-6 items-stretch lg:grid-cols-5">
-          {/* Movies */}
+          {/* movies */}
           <div className="h-full flex flex-col">
             <h5 className="font-semibold mb-3">Movies</h5>
             <ul className="pe-4 lg:border-e border-gray-600">

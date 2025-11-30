@@ -1,10 +1,22 @@
 import { Link } from "react-router-dom";
+import { useWatchlist } from "./contexts/WatchlistContext";
 
 export default function MovieAndTvShowCardHorizontal({ contentObj, number }) {
+  const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
+
+  const check = isInWatchlist(contentObj.id, contentObj.type);
+
+  function toggleWatchlist() {
+    if (check) {
+      removeFromWatchlist(contentObj.id, contentObj.type);
+    } else {
+      addToWatchlist(contentObj);
+    }
+  }
   return (
     <div className="flex items-center p-2 border-b border-b-gray-600 last:border-b-0 gap-2 sm:p-4">
       {/* poster */}
-      <Link to={`/${contentObj.mediaType}/${contentObj.id}`}>
+      <Link to={`/${contentObj.type}/${contentObj.id}`}>
         <img
           src={contentObj.image}
           alt={contentObj.title}
@@ -17,7 +29,7 @@ export default function MovieAndTvShowCardHorizontal({ contentObj, number }) {
         {/* title, year, category and rating */}
         <div className="flex flex-col items-start justify-between h-full gap-2 sm:gap-4">
           {/* title */}
-          <Link to={`/${contentObj.mediaType}/${contentObj.id}`}>
+          <Link to={`/${contentObj.type}/${contentObj.id}`}>
             <h2 className="text-base font-bold text-white hover:text-yellow-400 transition sm:text-2xl">
               {" "}
               {number}. {contentObj.title}{" "}
@@ -40,8 +52,12 @@ export default function MovieAndTvShowCardHorizontal({ contentObj, number }) {
           </div>
         </div>
         {/* watchlist icon */}
-        <div>
-          <i className="fa-solid fa-bookmark text-2xl text-white hover:text-yellow-400 transition cursor-pointer"></i>
+        <div onClick={toggleWatchlist}>
+          <i
+            className={`fa-solid fa-bookmark text-2xl cursor-pointer transition hover:text-yellow-400 ${
+              check ? "text-yellow-400" : ""
+            }`}
+          ></i>
         </div>
       </div>
     </div>

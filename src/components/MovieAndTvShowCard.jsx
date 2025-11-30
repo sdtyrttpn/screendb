@@ -1,10 +1,23 @@
 import { Link } from "react-router-dom";
+import { useWatchlist } from "./contexts/WatchlistContext";
 
 export default function MovieAndTvShowCard({ contentObj }) {
+  const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
+
+  const check = isInWatchlist(contentObj.id, contentObj.type);
+
+  function toggleWatchlist() {
+    if (check) {
+      removeFromWatchlist(contentObj.id, contentObj.type);
+    } else {
+      addToWatchlist(contentObj);
+    }
+  }
+
   return (
     <div className="flex flex-col max-w-40 min-w-40">
       <div className="border-3 rounded-md hover:border-yellow-400 transition cursor-pointer">
-        <Link to={`/${contentObj.mediaType}/${contentObj.id}`}>
+        <Link to={`/${contentObj.type}/${contentObj.id}`}>
           <div className="relative">
             {/* poster */}
             <img
@@ -40,14 +53,18 @@ export default function MovieAndTvShowCard({ contentObj }) {
         <div className="ms-1 min-w-0">
           {/* title */}
           <h2 className="font-bold truncate hover:text-yellow-400 transition">
-            <Link to={`/${contentObj.mediaType}/${contentObj.id}`}>{contentObj.title}</Link>
+            <Link to={`/${contentObj.type}/${contentObj.id}`}>{contentObj.title}</Link>
           </h2>
           {/* date */}
           <p className="text-gray-300 text-sm">{contentObj.year}</p>
         </div>
         {/* watchlist icon */}
-        <div>
-          <i className="fa-solid fa-bookmark text-2xl cursor-pointer transition"></i>
+        <div onClick={toggleWatchlist}>
+          <i
+            className={`fa-solid fa-bookmark text-2xl cursor-pointer transition hover:text-yellow-400 ${
+              check ? "text-yellow-400" : ""
+            }`}
+          ></i>
         </div>
       </div>
     </div>

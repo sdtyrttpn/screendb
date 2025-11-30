@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { PersonDetails } from "../APIs/contentApiPersonDetails";
 import PersonKnownForSlider from "./PersonKnownForSlider";
+import Loader from "./Loader";
 
 export default function PersonDetailsPage({ person_id }) {
   const [person, setPerson] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [showReadMore, setShowReadMore] = useState(false);
   const bioRef = useRef(null);
 
@@ -11,26 +13,27 @@ export default function PersonDetailsPage({ person_id }) {
     async function getPersonDetails() {
       const data = await PersonDetails(person_id);
       setPerson(data);
+      setLoading(false);
     }
     getPersonDetails();
   }, [person_id]);
 
   useEffect(() => {
     if (!person) return;
-
     const bioEl = bioRef.current;
-
     if (bioEl) {
       const fullHeight = bioEl.scrollHeight;
-
       const lineHeight = parseFloat(getComputedStyle(bioEl).lineHeight);
       const maxHeight = lineHeight * 6;
-
       if (fullHeight > maxHeight) {
         setShowReadMore(true);
       }
     }
   }, [person]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   if (!person) return null;
 

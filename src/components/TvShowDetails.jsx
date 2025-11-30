@@ -2,17 +2,24 @@ import { useEffect, useState } from "react";
 import { SingleTvShow } from "../APIs/contentApiSingleTvShow.js";
 import CastSlider from "./PersonCardSliderForContentDetail.jsx";
 import TvShowCardSlider from "./TvShowCardSlider.jsx";
+import Loader from "./Loader.jsx";
 
 export default function TvShowDetails({ tv_id }) {
   const [tvShow, setTvShow] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getTvShowDetails() {
       const data = await SingleTvShow(tv_id);
       setTvShow(data);
+      setLoading(false);
     }
     getTvShowDetails();
   }, [tv_id]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div>

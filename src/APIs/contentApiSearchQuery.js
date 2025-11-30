@@ -20,6 +20,7 @@ export async function MovieListContentApi(link) {
       year: dateRaw ? dateRaw.slice(0, 4) : "Unknown",
       overview: c.overview || "No summary available.",
       backDrop: c.backdrop_path ? `https://image.tmdb.org/t/p/w500${c.backdrop_path}` : noBackdrop,
+      type: c.media_type === "movie" ? "movie" : "tv-show",
     };
   } catch (error) {
     console.error("API Error:", error);

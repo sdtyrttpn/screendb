@@ -18,6 +18,8 @@ import SearchResultPage from "./pages/SearchResultsPage";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./components/RootLayout";
+import { WatchlistProvider } from "./components/contexts/WatchlistContext";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const routes = createBrowserRouter([
   {
@@ -39,10 +41,15 @@ const routes = createBrowserRouter([
       { path: "/tv-show/:tv_id", element: <TvShowDetailsPage /> },
       { path: "/person/:person_id", element: <PersonDetailsPage /> },
       { path: "/search-results/:query", element: <SearchResultPage /> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);
 
 export default function App() {
-  return <RouterProvider router={routes} />;
+  return (
+    <WatchlistProvider>
+      <RouterProvider router={routes} />
+    </WatchlistProvider>
+  );
 }
